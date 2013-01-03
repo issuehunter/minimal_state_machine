@@ -62,6 +62,7 @@ Issue.new.state
 issue = Issue.new
 issue.save
 issue.state_name = 'closed'
+issue.save
 issue.state
 => #<IssueState::Closed id: 1, type: "IssueState::Closed", state_machine_id: 1, state_machine_type: "Issue", created_at: "2013-01-03 19:13:31", updated_at: "2013-01-03 19:13:31"> 
 ```
