@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.version       = MinimalStateMachine::VERSION
   gem.authors       = ["Matteo Depalo"]
   gem.email         = ["matteodepalo@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{A state machine for activerecord implemented with the state pattern}
+  gem.summary       = %q{A state machine implemented with the state pattern}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($/)
