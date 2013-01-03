@@ -59,8 +59,7 @@ What would happen with this configuration:
 Issue.new.state
 => #<IssueState::Open id: nil, type: "IssueState::Open", state_machine_id: nil, state_machine_type: "Issue", created_at: nil, updated_at: nil> 
 
-issue = Issue.new
-issue.save
+issue = Issue.create
 issue.state_name = 'closed'
 issue.save
 issue.state
