@@ -1,20 +1,6 @@
 # MinimalStateMachine
 
-TODO: Write a gem description
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'minimal_state_machine'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install minimal_state_machine
+A state machine for activerecord implemented with the state pattern
 
 ## Usage
 
