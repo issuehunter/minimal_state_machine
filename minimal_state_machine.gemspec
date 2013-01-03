@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Matteo Depalo"]
   gem.email         = ["matteodepalo@gmail.com"]
   gem.description   = %q{A state machine for activerecord implemented with the state pattern}
-  gem.summary       = %q{A state machine implemented with the state pattern}
+  gem.summary       = %q{A state machine}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($/)
