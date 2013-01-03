@@ -1,4 +1,4 @@
-class CreateStates < ActiveRecord::Migration
+class CreateMsmStates < ActiveRecord::Migration
   def change
     create_table :msm_states do |t|
       t.string :type
