@@ -1,6 +1,6 @@
 # MinimalStateMachine
 
-A state machine for activerecord implemented with the state pattern
+A state machine for ActiveRecord implemented with the state pattern
 
 ## Usage
 
