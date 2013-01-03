@@ -47,6 +47,7 @@ describe StateMachine do
 
   it 'changes state' do
     @state_machine.state_name = 'closed'
+    @state_machine.save
 
     @state_machine.state.should be_a(StateMachineClosed)
   end

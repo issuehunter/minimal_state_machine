@@ -34,7 +34,6 @@ module MinimalStateMachine
       if state.class.valid_transition_states.include?(state_name)
         state.destroy
         self.state = self.class.states[state_name.to_sym].new
-        save
       else
         raise InvalidTransitionError
       end
