@@ -9,6 +9,9 @@ module MinimalStateMachine
     has_one :state, :as => :state_machine, :class_name => 'MinimalStateMachine::State'
 
     after_initialize :set_initial_state, :if => proc { state.nil? }
+    after_save :destroy_previous_state, :if => proc { previous_state && previous_state != state }
+
+    attr_accessor :previous_state
 
     def self.states
       {}
@@ -32,7 +35,7 @@ module MinimalStateMachine
 
     def transition_to(state_name)
       if state.class.valid_transition_states.include?(state_name)
-        state.destroy
+        self.previous_state = state
         self.state = self.class.states[state_name.to_sym].new
       else
         raise InvalidTransitionError
@@ -45,6 +48,10 @@ module MinimalStateMachine
       else
         self.state_name = self.class.states.keys.map(&:to_s).first
       end
+    end
+
+    def destroy_previous_state
+      previous_state.destroy
     end
   end
 end

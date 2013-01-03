@@ -52,6 +52,13 @@ describe StateMachine do
     @state_machine.state.should be_a(StateMachineClosed)
   end
 
+  it 'destroys the previous state after the transition' do
+    @state_machine.state_name = 'closed'
+    @state_machine.save
+
+    MinimalStateMachine::State.count.should == 1
+  end
+
   it 'raises an invalid transition error if the new state is not among the allowed transition states' do
     expect { @state_machine.state_name = 'solved' }.to raise_error('MinimalStateMachine::InvalidTransitionError')
   end
