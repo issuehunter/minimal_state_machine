@@ -5,7 +5,7 @@ require 'rails/generators/active_record'
 class MinimalStateMachineGenerator < Rails::Generators::Base
   include Rails::Generators::Migration
 
-  desc "Creates migration files required by reputation system gem."
+  desc "Creates migration files required by minimal state machine gem."
 
   self.source_paths << File.join(File.dirname(__FILE__), 'templates')
 
