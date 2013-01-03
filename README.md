@@ -81,6 +81,7 @@ issue.state
 ```
 
 If you try to change the state to a non valid state a `MinimalStateMachine::InvalidTransitionError` will be raised.
+
 If you try to set the state to a non declared state a `MinimalStateMachine::InvalidStateError` will be raised.
 
 ## Contributing
