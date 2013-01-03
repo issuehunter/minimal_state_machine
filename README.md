@@ -50,7 +50,7 @@ end
 class IssueState::Solved < MinimalStateMachine::State; end
 ```
 
-As you can se we define the possible states with an Hash including both the state names and the classes representing the states.
+As you can see we define the possible states with an Hash including both the state names and the classes representing the states.
 We can provide an optional `initial_state` class method to indicate the initial state (the default value is the first of the keys in the states Hash)
 
 What would happen with this configuration:
