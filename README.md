@@ -1,4 +1,4 @@
-# MinimalStateMachine
+# MinimalStateMachine [![Build Status](https://secure.travis-ci.org/issuehunter/minimal_state_machine.png)](http://travis-ci.org/issuehunter/minimal_state_machine)
 
 A state machine for ActiveRecord implemented with the state pattern
 
