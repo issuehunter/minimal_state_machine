@@ -52,6 +52,10 @@ describe StateMachine do
     @state_machine.state.should be_a(StateMachineClosed)
   end
 
+  it 'provides a human friendly getter for the state_name' do
+    @state_machine.state_name.should == 'open'
+  end
+
   it 'destroys the previous state after the transition' do
     @state_machine.state_name = 'closed'
     @state_machine.save

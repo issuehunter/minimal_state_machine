@@ -29,6 +29,10 @@ module MinimalStateMachine
       end
     end
 
+    def state_name
+      self.class.states.invert[state.class].to_s
+    end
+
     private
 
     class InvalidTransitionError < StandardError; end
