@@ -1,20 +1,17 @@
 require 'minimal_state_machine'
 require 'debugger'
 
-root = File.expand_path(File.join(File.dirname(__FILE__), '..'))
-ActiveRecord::Base.establish_connection(
-  :adapter => "sqlite3",
-  :database => "#{root}/db/minimal_state_machine.sqlite3"
-)
+ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :database => ":memory:")
+
+ActiveRecord::Migration.verbose = false
+ActiveRecord::Migrator.up("lib/generators/minimal_state_machine/templates")
+ActiveRecord::Migration.create_table :state_machines
 
 RSpec.configure do |config|
-  config.before(:each) do
-    ActiveRecord::Base.connection.increment_open_transactions
-    ActiveRecord::Base.connection.begin_db_transaction
-  end
-
-  config.after(:each) do
-    ActiveRecord::Base.connection.rollback_db_transaction
-    ActiveRecord::Base.connection.decrement_open_transactions
+  config.around do |example|
+    ActiveRecord::Base.transaction do
+      example.run
+      raise ActiveRecord::Rollback
+    end
   end
 end

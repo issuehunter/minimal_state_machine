@@ -14,14 +14,14 @@ class MinimalStateMachineGenerator < Rails::Generators::Base
   end
 
   def create_migration_files
-    create_migration_file_if_not_exist 'create_msm_states'
+    create_migration_file_if_not_exist 'create_msm_states', '001'
   end
 
   private
 
-  def create_migration_file_if_not_exist(file_name)
+  def create_migration_file_if_not_exist(file_name, version)
     unless self.class.migration_exists?(File.dirname(File.expand_path("db/migrate/#{file_name}")), file_name)
-      migration_template "#{file_name}.rb", "db/migrate/#{file_name}.rb"
+      migration_template "#{version}_#{file_name}.rb", "db/migrate/#{file_name}.rb"
     end
   end
 end

@@ -1,15 +1,5 @@
 require 'spec_helper'
 
-ActiveRecord::Base.connection.execute("DROP TABLE IF EXISTS 'msm_states'")
-ActiveRecord::Base.connection.execute("DROP TABLE IF EXISTS 'state_machines'")
-ActiveRecord::Base.connection.create_table(:msm_states) do |t|
-  t.string :type
-  t.references :state_machine, :polymorphic => true  
-  t.timestamps
-end
-
-ActiveRecord::Base.connection.create_table(:state_machines)
-
 class StateMachine < ActiveRecord::Base
   include MinimalStateMachine
 
