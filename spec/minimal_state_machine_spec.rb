@@ -53,7 +53,7 @@ describe StateMachine do
     MinimalStateMachine::State.count.should == 1
   end
 
-  it 'raises an invalid transition error if the new state is not among the allowed transition states' do
+  it 'adds error if the new state is not among the allowed transition states' do
     @state_machine.state_name = 'solved'
     @state_machine.should_not be_valid
     @state_machine.errors[:state].should include('invalid transition')
