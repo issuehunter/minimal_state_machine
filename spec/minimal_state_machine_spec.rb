@@ -54,7 +54,9 @@ describe StateMachine do
   end
 
   it 'raises an invalid transition error if the new state is not among the allowed transition states' do
-    expect { @state_machine.state_name = 'solved' }.to raise_error('MinimalStateMachine::InvalidTransitionError')
+    @state_machine.state_name = 'solved'
+    @state_machine.should_not be_valid
+    @state_machine.errors[:state].should include('invalid transition')
   end
 
   it 'raises an invalid state error if the state assigned in not among the allowed states' do

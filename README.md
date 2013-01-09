@@ -66,7 +66,7 @@ issue.state
 => #<IssueState::Closed id: 1, type: "IssueState::Closed", state_machine_id: 1, state_machine_type: "Issue", created_at: "2013-01-03 19:13:31", updated_at: "2013-01-03 19:13:31"> 
 ```
 
-If you try to change the state to a non valid state a `MinimalStateMachine::InvalidTransitionError` will be raised.
+If you try to change the state to a non valid state record validation will fail with *invalid transition* error.
 
 If you try to set the state to a non declared state a `MinimalStateMachine::InvalidStateError` will be raised.
 

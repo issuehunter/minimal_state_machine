@@ -11,6 +11,10 @@ module MinimalStateMachine
     after_initialize :set_initial_state, :if => proc { state.nil? }
     after_save :destroy_previous_state, :if => proc { previous_state && previous_state != state }
 
+    validate do
+      self.errors.add(:state, 'invalid transition') if previous_state && !previous_state.class.valid_transition_states.include?(state_name)
+    end
+
     attr_accessor :previous_state
 
     def self.states
@@ -21,12 +25,8 @@ module MinimalStateMachine
 
     def state_name=(state_name)
       raise InvalidStateError unless self.class.states.keys.map(&:to_s).include?(state_name)
-
-      if state.nil? || state.new_record?
-        self.state = self.class.states[state_name.to_sym].new
-      else
-        transition_to state_name
-      end
+      
+      transition_to(state_name)
     end
 
     def state_name
@@ -35,15 +35,9 @@ module MinimalStateMachine
 
     private
 
-    class InvalidTransitionError < StandardError; end
-
     def transition_to(state_name)
-      if state.class.valid_transition_states.include?(state_name)
-        self.previous_state = state
-        self.state = self.class.states[state_name.to_sym].new
-      else
-        raise InvalidTransitionError
-      end
+      self.previous_state = state
+      self.state = self.class.states[state_name.to_sym].new
     end
 
     def set_initial_state
