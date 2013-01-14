@@ -51,12 +51,15 @@ describe StateMachine do
     @state_machine.state.should be_a(StateMachineOpen)
   end
 
-  it 'provides a human friendly getter for the state_name' do
-    @state_machine.state_name.should == 'open'
+  it 'should provide a human friendly getter for the state_name but it doesn\'t' do
+    @state_machine.state_name.should eq('open')
+    @state_machine = StateMachine.first
+    @state_machine.state_name.should be_nil
   end
 
   it 'destroys the previous state after the transition' do
     @state_machine.state_name = 'closed'
+    @state_machine.save
 
     expect { @state_machine.save }.not_to change { MinimalStateMachine::State.count }
   end

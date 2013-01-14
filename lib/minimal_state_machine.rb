@@ -21,7 +21,7 @@ module MinimalStateMachine
     end
 
     after_validation do
-      transition_to(state_name) if state_name != state.try(:name)
+      transition_to(state_name) if state_name != state.try(:name) && errors.empty?
     end
 
     def self.states
