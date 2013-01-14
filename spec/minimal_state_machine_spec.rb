@@ -58,7 +58,7 @@ describe StateMachine do
   it 'destroys the previous state after the transition' do
     @state_machine.state_name = 'closed'
 
-    expect { @state_machine.save }.to change { MinimalStateMachine::State.count }.to(1)
+    expect { @state_machine.save }.not_to change { MinimalStateMachine::State.count }
   end
 
   it 'adds error if the new state is not among the allowed transition states' do
