@@ -23,16 +23,19 @@ module MinimalStateMachine
       {}
     end
 
+    def self.state_names
+      states.keys.map(&:to_s)
+    end
+
     class InvalidStateError < StandardError; end
 
     def state_name=(state_name)
-      raise InvalidStateError unless self.class.states.keys.map(&:to_s).include?(state_name)
-      
-      transition_to(state_name)
+      raise InvalidStateError unless self.class.state_names.include?(state_name)
+      transition_to(state_name) unless self.state_name == state_name
     end
 
     def state_name
-      state.name
+      state.try(:name)
     end
 
     private
@@ -46,7 +49,7 @@ module MinimalStateMachine
       if self.class.respond_to?(:initial_state) && self.class.initial_state
         self.state_name = self.class.initial_state
       else
-        self.state_name = self.class.states.keys.map(&:to_s).first
+        self.state_name = self.class.state_names.first
       end
     end
 

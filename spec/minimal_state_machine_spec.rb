@@ -39,7 +39,16 @@ describe StateMachine do
     @state_machine.state_name = 'closed'
     @state_machine.save
 
+    @state_machine.should be_valid
     @state_machine.state.should be_a(StateMachineClosed)
+  end
+
+  it 'doesn\'t change state if new state is the same as current state' do
+    @state_machine.state_name = 'open'
+    @state_machine.save
+
+    @state_machine.should be_valid
+    @state_machine.state.should be_a(StateMachineOpen)
   end
 
   it 'provides a human friendly getter for the state_name' do
