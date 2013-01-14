@@ -12,7 +12,9 @@ module MinimalStateMachine
     after_save :destroy_previous_state, :if => proc { previous_state && previous_state != state }
 
     validate do
-      self.errors.add(:state, 'invalid transition') if previous_state && !previous_state.class.valid_transition_states.include?(state_name)
+      if previous_state && !previous_state.valid_transition_to?(state_name)
+        self.errors.add(:state, "invalid transition from #{previous_state.name} to #{state_name}")
+      end
     end
 
     attr_accessor :previous_state
@@ -30,7 +32,7 @@ module MinimalStateMachine
     end
 
     def state_name
-      self.class.states.invert[state.class].to_s
+      state.name
     end
 
     private
